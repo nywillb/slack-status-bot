@@ -42,9 +42,18 @@ func Bot_FindClassByName(data map[string]interface{}, name string) (int) {
 
 func Bot_SetStatusToClass(class ScheduleClass) {
 	log.Println("Setting status for " + class.Name)
+	if strings.Contains(strings.ToLower(class.Name), "algebra") || strings.Contains(strings.ToLower(class.Names), "geometry") || strings.Contains(strings.ToLower(class.Names), "calculus") || strings.Contains(strings.ToLower(class.Names), "geometry") {
+		var emoji = ":heavy_division_sign:"
+	} else if strings.Contains(strings.ToLower(class.Name), "house") {
+		var emoji = ":house:"
+	} else if strings.Contains(strings.ToLower(class.Name), "spanish") || strings.Contains(strings.ToLower(class.Names), "mandarin") || strings.Contains(strings.ToLower(class.Names), "french") || strings.Contains(strings.ToLower(class.Names), "latin") || strings.Contains(strings.ToLower(class.Names), "geometry") {
+		var emoji = ":speech_balloon:"
+	} else {
+		var emoji = ":school"
+	}
 	API_Slack_UpdateStatus(API_Slack_StatusInfo{
 		class.Name + " in " + class.Room,
-		":school:",
+		emoji,
 	})
 }
 
